@@ -1,12 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type = "text/css" href="style.css">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="icon.jpg">
+
   <title>Sendator</title>
+  <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
 </head>
 
 <body>
 
+<<<<<<< HEAD
   <div id = "title">
     <p>Sendator</p>
   </div>
@@ -21,5 +34,46 @@
       <input type="text" name="comment" size="50"><br><br>
       <input type="submit" value="Send">
     </form>
+=======
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Sendator</h1>
+            <p class="lead">Send A Tweet To Your Senator.</p>
+            <p class="lead">
+                <form action="/api/twitter" method="post">
+                  State:<br>
+                  <input type="text" name="state"><br>
+                  Tweet:<br>
+                  <input type="text" name="tweet" size="50"><br><br>
+                  <input type="submit" value="Send">
+                </form>
+            </p>
+          </div>
+
+          <a class="twitter-timeline" data-theme="dark" data-link-color="#E81C4F" href="https://twitter.com/mHacksSendator">Tweets by mHacksSendator</a>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+  <!-- Bootstrap core JavaScript
+   ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+>>>>>>> 36b98e01c055d12970c9f64a0c9bcf2c579106e8
 </body>
 </html>
