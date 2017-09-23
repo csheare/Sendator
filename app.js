@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 const civic = require('./api/civic');
 
-const url = 'localhost';
+//const url = 'localhost';
 const port = process.env.PORT || 4000;
 
 const app = express();
@@ -18,6 +18,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/twitter', civic);
 
-app.listen(port, url, ()=> {
-    console.log('Server started on localhost', port)
+app.listen(port, ()=> {
+    console.log('Server started on port', port)
 });
