@@ -72,7 +72,10 @@ router.post('/', (req, res) => {
         })
     })
     .then(() => { res.redirect('/'); })
-    .catch((err) => { res.redirect('/') })
+    .catch((err) => {
+        console.log(err); 
+        res.redirect('/');
+    })
 })
 
 
