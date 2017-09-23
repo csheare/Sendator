@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const email = require('./api/email');
+const civic = require('./api/civic');
 
 const url = 'localhost';
 const port = process.env.PORT || 4000;
@@ -15,7 +16,7 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.use('/api/email', email);
+app.use('/api/twitter', civic);
 
 app.listen(port, url, ()=> {
     console.log('Server started on localhost', port)
