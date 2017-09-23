@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const email = require('./api/email');
 const civic = require('./api/civic');
 
 const url = 'localhost';
