@@ -18,11 +18,12 @@ const grabRepresentatives = (address) => {
     return new Promise((resolve, reject) => {
         request.get(`${URL}&address=${address}&roles=legislatorUpperBody`, (err, res, body) => {
             if (err) {
-                reject(err);
+                return reject(err);
             } else {
                 const data = JSON.parse(body)
-                console.log('data', data);
                 let officials = data.officials
+                if (typeof(officials) === 'undefined')
+                    return reject('Not valid address')
                 let twitterHandles = []
                 officials.map(senator => {
                     channels = senator.channels;
@@ -41,7 +42,7 @@ const tweet = (status) => {
     return new Promise((resolve, reject) => {
         Twitter.post('statuses/update', {status}, (err, data, res) => {
             if (err) {
-                reject(err);
+                return reject(err);
             } else {
                 resolve(data);
             }
@@ -56,12 +57,12 @@ router.get('/:state', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {comment, state} = req.body;
+    const {tweet, state} = req.body;
     grabRepresentatives(state)
     .then(handles => {
         handles.map( (handle) => {
-            let tweet = `@${handle} -- ${comment}`;
-            Twitter.post('statuses/update', {status: tweet}, (err, data, res) => {
+            let tweetMessage = `@${handle} -- ${tweet}`;
+            Twitter.post('statuses/update', {status: tweetMessage}, (err, data, res) => {
                 if (err) {
                     throw new Error('Unable to tweet at ', handle);
                 } else {
@@ -71,7 +72,7 @@ router.post('/', (req, res) => {
         })
     })
     .then(() => { res.redirect('/'); })
-    .catch((err) => { console.log(err) })
+    .catch((err) => { res.redirect('/') })
 })
 
 
