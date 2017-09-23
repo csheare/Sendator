@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/csheare/Sendator#readme",
   "dependencies": {
-    "alexa-sdk": "^1.0.14"
+    "alexa-sdk": "^1.0.14",
+    "body-parser": "^1.18.2",
+    "express": "^4.15.4",
+    "nodemailer": "^4.1.0"
   }
 }
