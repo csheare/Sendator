@@ -163,4 +163,13 @@ body {
 }
 input{
     color: black;
+
+}
+form{
+  font-family: 'Wendy One', sans-serif;
+}
+.lead{
+  font-family: 'Wendy One', sans-serif;
+  font-size: 30px;
+
 }
