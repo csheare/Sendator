@@ -59,22 +59,25 @@ router.get('/:state', (req, res) => {
 
 router.post('/', (req, res) => {
     let {tweet, state} = req.body;
-    console.log('BODY', req.body);
     if (tweet === 'undefined' || state === 'undefined'){
         res.send().json({error: 500});
+        return
     }
     grabRepresentatives(state)
     .then(handles => {
-        console.log('HANDLES', handles);
         if (handles.length === 0 || tweet === 'undefined') {
             res.send().json({error: 500})
         }
         else {
             for (let i = 0; i < handles.length; i++) {
                 let tweetMessage = `@${handles[i]} -- ${tweet} #MHSendator`;
-                tweet(tweetMessage)
-                .then((data) => { console.log('SUCCESS', data)})
-                .catch((err) => { throw new Error('Error creating tweet', err)});
+                Twitter.post('statuses/update', {status: tweetMessage}, (err, data) => {
+                    if (err) {
+                        throw new Error('Undable to tweet at ');
+                    } else {
+                        console.log('success', data);
+                    }
+                });
             }
         }
     })
