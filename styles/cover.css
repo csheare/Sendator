@@ -163,7 +163,9 @@ body {
 }
 input{
     color: black;
-
+}
+textarea{
+  color:black;
 }
 form{
   font-family: 'Wendy One', sans-serif;
@@ -171,5 +173,4 @@ form{
 .lead{
   font-family: 'Wendy One', sans-serif;
   font-size: 30px;
-
 }
