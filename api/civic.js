@@ -21,6 +21,7 @@ const grabRepresentatives = (address) => {
                 return reject(err);
             } else {
                 const data = JSON.parse(body)
+                console.log(data);
                 let officials = data.officials
                 if (typeof(officials) === 'undefined')
                     return reject('Not valid address')
@@ -74,7 +75,7 @@ router.post('/', (req, res) => {
     })
     .then(() => { res.redirect('/'); })
     .catch((err) => {
-        console.log(err); 
+        console.log(err);
         res.redirect('/');
     })
 })
