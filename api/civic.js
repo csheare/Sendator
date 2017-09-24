@@ -66,14 +66,15 @@ router.post('/', (req, res) => {
     grabRepresentatives(state)
     .then(handles => {
         if (handles.length === 0 || tweet === 'undefined') {
-            res.send().json({error: 500})
+            res.send().json({error: 500});
+            return;
         }
         else {
             for (let i = 0; i < handles.length; i++) {
                 let tweetMessage = `@${handles[i]} -- ${tweet} #MHSendator`;
                 Twitter.post('statuses/update', {status: tweetMessage}, (err, data) => {
                     if (err) {
-                        throw new Error('Undable to tweet at ');
+                        throw new Error('Undable to tweet', err);
                     } else {
                         console.log('success', data);
                     }
