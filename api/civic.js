@@ -61,14 +61,13 @@ router.post('/', (req, res) => {
     let {tweet, state} = req.body;
     console.log('BODY', req.body);
     if (tweet === undefined || state === undefined){
-        res.send().json({error: 500});
         return
     }
     grabRepresentatives(state)
     .then(handles => {
         console.log('HANDLES', handles)
         if (handles.length === 0 || tweet === undefined) {
-            res.send().json({error: 500});
+            return
         }
         else {
             for (let i = 0; i < handles.length; i++) {
