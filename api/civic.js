@@ -60,14 +60,14 @@ router.get('/:state', (req, res) => {
 router.post('/', (req, res) => {
     let {tweet, state} = req.body;
     console.log('BODY', req.body);
-    if (tweet === 'undefined' || state === 'undefined'){
+    if (tweet === undefined || state === undefined){
         res.send().json({error: 500});
         return
     }
     grabRepresentatives(state)
     .then(handles => {
         console.log('HANDLES', handles)
-        if (handles.length === 0 || tweet === 'undefined') {
+        if (handles.length === 0 || tweet === undefined) {
             res.send().json({error: 500});
         }
         else {
@@ -76,7 +76,7 @@ router.post('/', (req, res) => {
                 console.log('TWEET', tweetMessage);
                 Twitter.post('statuses/update', {status: tweetMessage}, (err, data) => {
                     if (err) {
-                        throw new Error('Undable to tweet', err.message);
+                        throw new Error('Undable to tweet', err);
                     } else {
                         console.log('success', data);
                     }
