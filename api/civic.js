@@ -60,8 +60,9 @@ router.post('/', (req, res) => {
     const {tweet, state} = req.body;
     grabRepresentatives(state)
     .then(handles => {
+        console.log('HANDLES', handles);
         handles.map( (handle) => {
-            let tweetMessage = `@${handle} -- ${tweet}`;
+            let tweetMessage = `@${handle} -- ${tweet} #MHSendator`;
             Twitter.post('statuses/update', {status: tweetMessage}, (err, data, res) => {
                 if (err) {
                     throw new Error('Unable to tweet at ', handle);
