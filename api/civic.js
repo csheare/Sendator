@@ -59,6 +59,9 @@ router.get('/:state', (req, res) => {
 
 router.post('/', (req, res) => {
     let {tweet, state} = req.body;
+    if (tweet === 'undefined' || state === 'undefined'){
+        res.send().json({error: 500});
+    }
     grabRepresentatives(state)
     .then(handles => {
         console.log('HANDLES', handles);
