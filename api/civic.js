@@ -3,10 +3,10 @@ const express = require('express');
 const Twit = require('twit');
 
 const Twitter = new Twit({
-    consumer_key: 'lT5LFthcDz8GC5nJEDRZTajn2',
-    consumer_secret: 'MZQfJ8TYgXkusdJnqac1CKaQhVRlE2WSA9E7YdUNT5eH7bpmSx',
-    access_token: '911695261986062338-YirhCNBkAnUCa6Vvxn3djcurSdoY4q7',
-    access_token_secret: 'NWWfKwTXzo6c8IJAGrjQFAO5pM1M47nThrOjfaJJkObuo'
+    consumer_key: '5NV8uh9PFo6mjAWFNxpAJfqc5',
+    consumer_secret: 'bqbdIlVNjtcS9pcxUuuH8x6XofqfoEJm62oO5hc49X0l9ZgfFL',
+    access_token: '911806493258854401-TEt0uY1TKtPcEdxXcK6mqGPeb9dbv8Y',
+    access_token_secret: 'pAkF41rgMKxVmv5jmxIL4jq5rpOpBmbeZSvRqYUiZufCP'
 })
 
 const API_KEY = process.env.API_KEY;
@@ -57,19 +57,30 @@ router.get('/:state', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {tweet, state} = req.body;
+    let {tweet, state} = req.body;
+    console.log('BODY', req.body);
+    if (tweet === undefined || state === undefined){
+        
+    }
     grabRepresentatives(state)
     .then(handles => {
-        handles.map( (handle) => {
-            let tweetMessage = `@${handle} -- ${tweet}`;
-            Twitter.post('statuses/update', {status: tweetMessage}, (err, data, res) => {
-                if (err) {
-                    throw new Error('Unable to tweet at ', handle);
-                } else {
-                    console.log('success', data);
-                }
-            })
-        })
+        console.log('HANDLES', handles)
+        if (handles.length === 0 || tweet === undefined) {
+            
+        }
+        else {
+            for (let i = 0; i < handles.length; i++) {
+                let tweetMessage = `@ ${handles[i]} -- ${tweet} # MHSendator`;
+                console.log('TWEET', tweetMessage);
+                Twitter.post('statuses/update', {status: tweetMessage}, (err, data, res) => {
+                    if (err) {
+                        //console.log('Undable to tweet', JSON.stringify(err));
+                    } else {
+                        console.log('success', data);
+                    }
+                });
+            }
+        }
     })
     .then(() => { res.redirect('/'); })
     .catch((err) => {
