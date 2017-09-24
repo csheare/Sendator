@@ -70,10 +70,10 @@ router.post('/', (req, res) => {
             return
         }
         for (let i = 0; i < handles.length; i++) {
-            let tweetMessage = `@${handle[i]} -- ${tweet} #MHSendator`;
+            let tweetMessage = `@${handles[i]} -- ${tweet} #MHSendator`;
             Twitter.post('statuses/update', {status: tweetMessage}, (err, data) => {
                 if (err) {
-                    throw new Error('Undable to tweet at ', handle);
+                    throw new Error('Undable to tweet at ', handles[i]);
                 } else {
                     console.log('success', data);
                 }
