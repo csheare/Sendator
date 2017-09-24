@@ -61,20 +61,24 @@ router.post('/', (req, res) => {
     let {tweet, state} = req.body;
     if (tweet === 'undefined' || state === 'undefined'){
         res.send().json({error: 500});
+        return
     }
     grabRepresentatives(state)
     .then(handles => {
-        console.log('HANDLES', handles);
-        handles.map( (handle) => {
-            let tweetMessage = `@${handle} -- ${tweet} #MHSendator`;
-            Twitter.post('statuses/update', {status: tweetMessage}, (err, data, res) => {
+        if (handles.length === 0) {
+            res.send().json({error: 500})
+            return
+        }
+        for (let i = 0; i < handles.length; i++) {
+            let tweetMessage = `@${handle[i]} -- ${tweet} #MHSendator`;
+            Twitter.post('statuses/update', {status: tweetMessage}, (err, data) => {
                 if (err) {
-                    throw new Error('Unable to tweet at ', handle);
+                    throw new Error('Undable to tweet at ', handle);
                 } else {
                     console.log('success', data);
                 }
-            })
-        })
+            });
+        }
     })
     .then(() => { res.redirect('/'); })
     .catch((err) => {
