@@ -58,7 +58,7 @@ router.get('/:state', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {tweet, state} = req.body;
+    let {tweet, state} = req.body;
     grabRepresentatives(state)
     .then(handles => {
         console.log('HANDLES', handles);
